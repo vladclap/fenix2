@@ -14302,7 +14302,6 @@ a.link-style:hover:before {
   font-size: 40px;
   font-weight: 400;
   line-height: 48px;
-  text-transform: capitalize;
 }
 
 .hny-title span {
@@ -14572,7 +14571,6 @@ a.dropdown-item:hover:before {
 }
 
 .navbar-expand-lg .navbar-nav .nav-link {
-  text-transform: capitalize;
   transition: all 0.5s ease;
   padding: 14px 0;
   font-size: 1.2em;
@@ -15028,7 +15026,6 @@ nav ul li a:hover {
 .w3l-main-slider .banner-info-bg p {
   color: #fff;
   font-weight: 400;
-  text-transform: capitalize;
   line-height: 30px;
   opacity: 0.8;
   letter-spacing:4px;
