@@ -16,7 +16,94 @@
   <link rel="stylesheet" href="assets/css/style-starter.css">
   <!-- Template CSS -->
 </head>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+      const popup = document.getElementById("popupForm");
+      const closeBtn = document.querySelector(".close-popup");
+      const orderButtons = document.querySelectorAll(".buy-button a");
+  
+      orderButtons.forEach(button => {
+          button.addEventListener("click", function (event) {
+              event.preventDefault(); // Відміна переходу по посиланню
+              popup.style.display = "flex";
+          });
+      });
+  
+      closeBtn.addEventListener("click", function () {
+          popup.style.display = "none";
+      });
+  
+      window.addEventListener("click", function (event) {
+          if (event.target === popup) {
+              popup.style.display = "none";
+          }
+      });
+  });
+  </script>
 
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+      const popup = document.getElementById("popupForm");
+      const closeBtn = document.querySelector(".close-popup");
+      const orderButtons = document.querySelectorAll(".buy-button a");
+      const orderForm = document.getElementById("orderForm");
+  
+      const TOKEN = '8076662475:AAEG4iY3EYhHuDqQP0CJhqXWq7meYzcHmQQ'; // Встав токен свого бота
+      const CHAT_ID = '462683342';   // Встав свій chat ID
+      const URL_API = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
+  
+      orderButtons.forEach(button => {
+          button.addEventListener("click", function (event) {
+              event.preventDefault();
+              popup.style.display = "flex";
+          });
+      });
+  
+      closeBtn.addEventListener("click", function () {
+          popup.style.display = "none";
+      });
+  
+      window.addEventListener("click", function (event) {
+          if (event.target === popup) {
+              popup.style.display = "none";
+          }
+      });
+  
+      orderForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+  
+          const name = document.getElementById("name").value;
+          const email = document.getElementById("email").value;
+          const message = document.getElementById("message").value;
+  
+          const text = `🔥 Нова заявка!\n👤 Ім'я: ${name}\n📧 Email: ${email}\n📨 Повідомлення: ${message}`;
+  
+          fetch(URL_API, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                  chat_id: CHAT_ID,
+                  text: text,
+              }),
+          })
+              .then(res => res.json())
+              .then(data => {
+                  if (data.ok) {
+                      alert('Заявка успішно відправлена!');
+                      popup.style.display = "none";
+                      orderForm.reset();
+                  } else {
+                      alert('Помилка при відправці. Спробуйте ще раз.');
+                  }
+              })
+              .catch(error => {
+                  alert('Сталася помилка: ' + error);
+              });
+      });
+  });
+  </script>
+  
+  
 <body>
   <!--header-->
 <header id="site-header" class="fixed-top">
@@ -317,6 +404,21 @@
       </div>
   </div>
 </section>
+
+<!-- Попап форма -->
+<div id="popupForm" class="popup-container">
+  <div class="popup-content">
+      <span class="close-popup">&times;</span>
+      <h3>Заповніть форму для замовлення</h3>
+      <form id="orderForm">
+          <input type="text" id="name" placeholder="Ім'я" required>
+          <input type="email" id="email" placeholder="Email" required>
+          <textarea id="message" placeholder="Повідомлення" required></textarea>
+          <button type="submit">Надіслати</button>
+      </form>
+  </div>
+</div>
+
 <!-- //Packages plans -->
 
 <!-- testimonials -->
