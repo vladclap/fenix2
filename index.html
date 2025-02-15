@@ -24,7 +24,7 @@
   
       orderButtons.forEach(button => {
           button.addEventListener("click", function (event) {
-              event.preventDefault(); // Відміна переходу по посиланню
+              event.preventDefault(); 
               popup.style.display = "flex";
           });
       });
@@ -48,8 +48,8 @@
       const orderButtons = document.querySelectorAll(".buy-button a");
       const orderForm = document.getElementById("orderForm");
   
-      const TOKEN = '8076662475:AAEG4iY3EYhHuDqQP0CJhqXWq7meYzcHmQQ'; // Встав токен свого бота
-      const CHAT_ID = '462683342';   // Встав свій chat ID
+      const TOKEN = '8076662475:AAEG4iY3EYhHuDqQP0CJhqXWq7meYzcHmQQ'; 
+      const CHAT_ID = '1674323111';   
       const URL_API = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
   
       orderButtons.forEach(button => {
