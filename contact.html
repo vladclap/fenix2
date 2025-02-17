@@ -15,6 +15,44 @@
     <link rel="stylesheet" href="assets/css/style-starter.css">
     <!-- Template CSS -->
   </head>
+
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+  
+      const token = '8076662475:AAEG4iY3EYhHuDqQP0CJhqXWq7meYzcHmQQ'; 
+      const chatId = '-1002406617831';  
+      
+  
+      const formData = new FormData(e.target);
+      const text = `
+  Нове повідомлення:
+  Ім'я: ${formData.get('name')}
+  Email: ${formData.get('email')}
+  Тема: ${formData.get('subject')}
+  Повідомлення: ${formData.get('message')}
+      `;
+  
+      fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: text,
+          parse_mode: 'HTML'
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        alert('Повідомлення успішно надіслано!');
+        e.target.reset();
+      })
+      .catch(error => {
+        console.error('Помилка:', error);
+        alert('Сталася помилка при надсиланні!');
+      });
+    });
+  </script>
 <body>
   <!--header-->
 <header id="site-header" class="fixed-top">
