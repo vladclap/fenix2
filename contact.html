@@ -16,41 +16,7 @@
     <!-- Template CSS -->
   </head>
 
-  <script>
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
-      e.preventDefault();
   
-      const token = '8076662475:AAEG4iY3EYhHuDqQP0CJhqXWq7meYzcHmQQ'; 
-      const chatId =  '-1002406617831'; 
-      
-  
-      const formData = new FormData(this);
-      const text = `📩 Нова заявка з сайту:\n\nІм'я: ${formData.get('name')}\nEmail: ${formData.get('email')}\nТема: ${formData.get('subject')}\nПовідомлення: ${formData.get('message')}`;
-  
-      fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          chat_id: chatId,
-          text: text,
-          parse_mode: 'HTML'
-        })
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.ok) {
-          alert('Повідомлення успішно надіслано!');
-          e.target.reset();
-        } else {
-          alert('Сталася помилка при надсиланні. Спробуйте пізніше.');
-        }
-      })
-      .catch(error => {
-        alert('Сталася помилка підключення до сервера!');
-        console.error('Error:', error);
-      });
-    });
-  </script>
 <body>
   <!--header-->
 <header id="site-header" class="fixed-top">
@@ -297,6 +263,40 @@
   <!--//MENU-JS-->
 
   <script src="assets/js/bootstrap.min.js"></script>
-
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+  
+      const token = '8076662475:AAEG4iY3EYhHuDqQP0CJhqXWq7meYzcHmQQ'; 
+      const chatId =  '-1002406617831'; 
+      
+  
+      const formData = new FormData(this);
+      const text = `📩 Нова заявка з сайту:\n\nІм'я: ${formData.get('name')}\nEmail: ${formData.get('email')}\nТема: ${formData.get('subject')}\nПовідомлення: ${formData.get('message')}`;
+  
+      fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: text,
+          parse_mode: 'HTML'
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.ok) {
+          alert('Повідомлення успішно надіслано!');
+          e.target.reset();
+        } else {
+          alert('Сталася помилка при надсиланні. Спробуйте пізніше.');
+        }
+      })
+      .catch(error => {
+        alert('Сталася помилка підключення до сервера!');
+        console.error('Error:', error);
+      });
+    });
+  </script>
 </body>
 </html>
